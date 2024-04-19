@@ -6,9 +6,29 @@ import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
+import Main from './components/Main.jsx';
+import Phones from './components/Phones.jsx';
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Main />,
+    children: [
+      {
+        path: "/phones",
+        element: <Phones></Phones>,
+        loader: () => fetch('http://localhost:3000/phones/')
+      },
+      {
+        path: "/phone/:id",
+        
+      }
+    ]
+  }
+])
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <App />
+    <RouterProvider router={router}></RouterProvider>
   </React.StrictMode>,
 )
